@@ -5,6 +5,7 @@
     "express": "^4.21.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.5"
   },
   "name": "mini-message-board",
@@ -14,7 +15,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "author": "FluffyRudy",
+  "license": "MIT",
+  "description": "\"Backend project 'mini message board' from theodinproject.com, fullstack javascript curriculum\"",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FluffyRudy/mini-message-board.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FluffyRudy/mini-message-board/issues"
+  },
+  "homepage": "https://github.com/FluffyRudy/mini-message-board#readme"
 }
