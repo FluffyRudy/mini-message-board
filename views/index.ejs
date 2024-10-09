@@ -1,12 +1,118 @@
 <head>
-    <link rel="stylesheet" href="./styles.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+            transition: all 1s 0.3ms;
+        }
+
+        a:hover {
+            opacity: 0.5;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .msg-container {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .msg-container li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .msg-container li:hover {
+            transform: scale(1.02);
+        }
+
+        .msg-detail {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        .toggle-detail {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .toggle-detail:hover {
+            background-color: #0056b3;
+        }
+
+        button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #28a745;
+            transition: background-color 0.3s;
+        }
+
+        button a:hover {
+            background-color: #218838;
+        }
+
+        h1 {
+            font-size: 1.2em;
+            margin: 0;
+            color: #333;
+        }
+    </style>
 </head>
-<ul>
-    <% messages.forEach((message) => { %>
-        <li>
-            <h1><%= message.user %></h1>
-            <p><%= message.text %> </p>
-            <p><%= message.added %></p>
-        </li>
-    <% }) %>
-</ul>
+<body>
+    <%- include("navbar") %> 
+    <ul class="msg-container">
+        <% if (messages.length === 0) { %>
+            <li>
+                <h1>No data</h1>
+            </li>
+        <% } else { %>
+            <% for (let elem of Object.values(messages)) { %>
+                <% const dynamicRoute = `/msg/${elem.id}` %> 
+                <li>
+                    <h1><%= elem.user %></h1>
+                    <div class="msg-detail">
+                        <p><%= elem.text %></p>
+                        <p><%= elem.added %></p>
+                    </div>
+                    <button class="toggle-detail" onclick="toggleMessageDetail(this)">Show</button>
+                    <button><a href="<%= dynamicRoute %>">Open</a></button>
+                </li>
+            <% } %>
+        <% } %>
+    </ul>
+    <script>
+        function toggleMessageDetail(button) {
+            const elem = button.parentElement.querySelector('.msg-detail');
+            const isVisible = elem.style.display === 'block';
+            elem.style.display = isVisible ? 'none' : 'block';
+            button.textContent = isVisible ? 'Show' : 'Hide';
+        }
+    </script>
+</body>
